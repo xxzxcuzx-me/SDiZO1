@@ -9,6 +9,7 @@
 #include "Heap.h"
 #include "Tree.h"
 #include <iostream>
+#include <fstream>
 
 void Tests::testArray() {
     Timer timer;
@@ -16,6 +17,8 @@ void Tests::testArray() {
     int choice = -1;
     int value;
     int index;
+    std::ifstream inputFile;
+    std::string inputFileName;
 
     while(choice != 0) {
         printMenuArray();
@@ -74,6 +77,20 @@ void Tests::testArray() {
             case 8:
                 array.printArray();
                 break;
+            case 9:
+                std::cout << "Podaj sciezke pliku z danymi \n>";
+                std::cin >> inputFileName;
+                inputFile.open(inputFileName);
+
+                if (!inputFile.is_open()) {
+                    std::cout << "Nie udalo sie otworzyc pliku " << inputFileName << "\n";
+                    continue;
+                }
+                while(!inputFile.eof()) {
+                    inputFile >> value;
+                    array.addLast(value);
+                }
+                break;
             default:
                 std::cout<<"Nie ma takiej opcji\n";
         }
@@ -86,6 +103,8 @@ void Tests::testList() {
     int choice = -1;
     int value;
     int addAfterThat;
+    std::ifstream inputFile;
+    std::string inputFileName;
 
     while(choice != 0) {
         printMenuList();
@@ -146,6 +165,20 @@ void Tests::testList() {
             case 8:
                 list.printList();
                 break;
+            case 9:
+                std::cout << "Podaj sciezke pliku z danymi \n>";
+                std::cin >> inputFileName;
+                inputFile.open(inputFileName);
+
+                if (!inputFile.is_open()) {
+                    std::cout << "Nie udalo sie otworzyc pliku " << inputFileName << "\n";
+                    continue;
+                }
+                while(!inputFile.eof()) {
+                    inputFile >> value;
+                    list.addLast(value);
+                }
+                break;
             default:
                 std::cout<<"Nie ma takiej opcji\n";
         }
@@ -157,6 +190,8 @@ void Tests::testHeap() {
     Heap heap;
     int choice = -1;
     int value;
+    std::ifstream inputFile;
+    std::string inputFileName;
 
     while(choice != 0) {
         printMenuHeap();
@@ -188,6 +223,20 @@ void Tests::testHeap() {
             case 4:
                 heap.printHeap();
                 break;
+            case 5:
+                std::cout << "Podaj sciezke pliku z danymi \n>";
+                std::cin >> inputFileName;
+                inputFile.open(inputFileName);
+
+                if (!inputFile.is_open()) {
+                    std::cout << "Nie udalo sie otworzyc pliku " << inputFileName << "\n";
+                    continue;
+                }
+                while(!inputFile.eof()) {
+                    inputFile >> value;
+                    heap.add(value);
+                }
+                break;
             default:
                 std::cout<<"Nie ma takiej opcji\n";
         }
@@ -200,6 +249,8 @@ void Tests::testTree() {
     Tree tree;
     int choice = -1;
     int value;
+    std::ifstream inputFile;
+    std::string inputFileName;
 
     while(choice != 0) {
         printMenuTree();
@@ -230,6 +281,20 @@ void Tests::testTree() {
                 break;
             case 4:
                 tree.printTree();
+                break;
+            case 5:
+                std::cout << "Podaj sciezke pliku z danymi \n>";
+                std::cin >> inputFileName;
+                inputFile.open(inputFileName);
+
+                if (!inputFile.is_open()) {
+                    std::cout << "Nie udalo sie otworzyc pliku " << inputFileName << "\n";
+                    continue;
+                }
+                while(!inputFile.eof()) {
+                    inputFile >> value;
+                    tree.add(value);
+                }
                 break;
             default:
                 std::cout<<"Nie ma takiej opcji\n";
@@ -264,6 +329,7 @@ void Tests::printMenuArray() {
     std::cout<<"  [6] Usun spod indeksu \n";
     std::cout<<"  [7] Znajdz element \n";
     std::cout<<"  [8] Wypisz tablice \n";
+    std::cout<<"  [9] Zbuduj z pliku \n";
     std::cout<<"  [0] Wyjscie \n";
     std::cout<<">";
 }
@@ -278,6 +344,7 @@ void Tests::printMenuList() {
     std::cout<<"  [6] Usun element \n";
     std::cout<<"  [7] Znajdz element \n";
     std::cout<<"  [8] Wypisz liste \n";
+    std::cout<<"  [9] Zbuduj z pliku \n";
     std::cout<<"  [0] Wyjscie \n";
     std::cout<<">";
 }
@@ -288,6 +355,7 @@ void Tests::printMenuHeap() {
     std::cout<<"  [2] Usun element \n";
     std::cout<<"  [3] Znajdz element \n";
     std::cout<<"  [4] Wypisz kopiec \n";
+    std::cout<<"  [5] Zbuduj z pliku \n";
     std::cout<<"  [0] Wyjscie \n";
     std::cout<<">";
 }
@@ -298,6 +366,7 @@ void Tests::printMenuTree() {
     std::cout<<"  [2] Usun element \n";
     std::cout<<"  [3] Znajdz element \n";
     std::cout<<"  [4] Wypisz drzewo \n";
+    std::cout<<"  [5] Zbuduj z pliku \n";
     std::cout<<"  [0] Wyjscie \n";
     std::cout<<">";
 }
